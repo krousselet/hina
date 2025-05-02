@@ -52,8 +52,7 @@ export default {
         'ya', 'yu', 'yo',
         'ra', 'ri', 'ru', 're', 'ro',
         'wa', 'wo', 'n'
-      ],
-      
+      ]
     };
   },
 
