@@ -20,8 +20,7 @@
       <!-- Canvas and model overlay -->
       <div class="canvas-wrapper">
         <img :src="modelImagePath" class="kana-model" />
-        <!-- Use v-if to toggle visibility of the canvas based on the isDrawComponentVisible flag -->
-        <canvas  ref="drawCanvas" width="400" height="400"></canvas>
+        <canvas ref="drawCanvas" width="400" height="400" />
       </div>
   
       <div class="score" v-if="score !== null">
@@ -35,67 +34,51 @@
     name: 'DrawComponent',
   
     data() {
-        return {
-    drawing: false,
-    canvas: null,
-    ctx: null,
-    kanaType: 'hiragana',
-    selectedKana: 'a',
-    score: null,
-    kanaList: [
-      'a', 'i', 'u', 'e', 'o',
-      'ka', 'ki', 'ku', 'ke', 'ko',
-      'sa', 'shi', 'su', 'se', 'so',
-      'ta', 'chi', 'tsu', 'te', 'to',
-      'na', 'ni', 'nu', 'ne', 'no',
-      'ha', 'hi', 'fu', 'he', 'ho',
-      'ma', 'mi', 'mu', 'me', 'mo',
-      'ya', 'yu', 'yo',
-      'ra', 'ri', 'ru', 're', 'ro',
-      'wa', 'wo', 'n'
-    ],
-    // isCanvasVisible: true,  // Ensure this is true initially
-    isDrawComponentVisible: true,
-  };
+      return {
+        drawing: false,
+        canvas: null,
+        ctx: null,
+        kanaType: 'hiragana',
+        selectedKana: 'a',
+        score: null,
+        kanaList: [
+          'a', 'i', 'u', 'e', 'o',
+          'ka', 'ki', 'ku', 'ke', 'ko',
+          'sa', 'shi', 'su', 'se', 'so',
+          'ta', 'chi', 'tsu', 'te', 'to',
+          'na', 'ni', 'nu', 'ne', 'no',
+          'ha', 'hi', 'fu', 'he', 'ho',
+          'ma', 'mi', 'mu', 'me', 'mo',
+          'ya', 'yu', 'yo',
+          'ra', 'ri', 'ru', 're', 'ro',
+          'wa', 'wo', 'n'
+        ]
+      };
     },
   
     computed: {
-        modelImagePath() {
-    return `/models/${this.kanaType}/${this.selectedKana}.svg`;
-  }
+      modelImagePath() {
+        return `/models/${this.kanaType}/${this.selectedKana}.svg`; // Image path
+      }
     },
   
     mounted() {
-  this.$nextTick(() => {
-    this.canvas = this.$refs.drawCanvas;
-    if (this.canvas) {
+      this.canvas = this.$refs.drawCanvas;
       this.ctx = this.canvas.getContext('2d');
+  
       // Mouse Events
       this.canvas.addEventListener('mousedown', this.startDraw);
       this.canvas.addEventListener('mousemove', this.draw);
       this.canvas.addEventListener('mouseup', this.endDraw);
       this.canvas.addEventListener('mouseout', this.endDraw);
-
+  
       // Touch Events
       this.canvas.addEventListener('touchstart', this.startDraw, { passive: false });
       this.canvas.addEventListener('touchmove', this.draw, { passive: false });
       this.canvas.addEventListener('touchend', this.endDraw);
-    } else {
-      console.error('Canvas not available in mounted.');
-    }
-  });
-},
+    },
   
     methods: {
-        methods: {
-  hideCanvas() {
-    this.isDrawComponentVisible = false; // Hide the canvas
-  },
-  
-  showCanvas() {
-    this.isDrawComponentVisible = true;  // Show the canvas
-  },
-} ,
       getPos(e) {
         const rect = this.canvas.getBoundingClientRect();
         if (e.touches) {
@@ -137,9 +120,9 @@
       },
   
       clearCanvas() {
-  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  this.score = null;
-},
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.score = null;
+      },
   
       scoreDrawing() {
     const userData = this.ctx.getImageData(0, 0, 400, 400).data;

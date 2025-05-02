@@ -1,5 +1,5 @@
 <template>
-      <DrawComponent v-if="isDrawComponentVisible"/>
+      <DrawComponent/>
   </template>
   
   <script>
@@ -7,7 +7,7 @@
   import DrawComponent from '@/components/DrawComponent.vue'
   
   export default {
-    name: 'DrawComponent',
+    name: 'DrawView',
     components: {
       DrawComponent
     }
