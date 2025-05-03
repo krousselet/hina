@@ -8,6 +8,10 @@
 </template>
 
 <style lang="scss">
+
+// VARIABLES
+$background-black: rgba(0, 0, 0, 0.945);
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

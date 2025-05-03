@@ -1,20 +1,34 @@
 <template>
   <div id="alphabet-container">
     <div class="nihon-container">
-        <img src="../../public/images/desktop/nihon.png" alt="image du drapeau du japon" srcset="">
+      <img
+        src="../../public/images/desktop/nihon.png"
+        alt="image du drapeau du japon"
+        srcset=""
+      />
     </div>
     <div class="sakura-container-left">
-        <img src="../../public/images/desktop/sakura.png" alt="image de fleur de cerisier" srcset="">
+      <img
+        src="../../public/images/desktop/sakura.png"
+        alt="image de fleur de cerisier"
+        srcset=""
+      />
     </div>
     <div class="sakura-container-right">
-        <img src="../../public/images/desktop/sakura.png" alt="image de fleur de cerisier" srcset="">
+      <img
+        src="../../public/images/desktop/sakura.png"
+        alt="image de fleur de cerisier"
+        srcset=""
+      />
     </div>
     <div class="wrapper-left wrapper">
-      <div class="title-container">
-        <p>hiragana</p>
-      </div>
-      <div class="title-symbols-container">
-        <p>ひらがな</p>
+      <div class="container">
+        <div class="title-container">
+          <p>hiragana</p>
+        </div>
+        <div class="title-symbols-container">
+          <p>ひらがな</p>
+        </div>
       </div>
       <div class="chart">
         <table id="hiragana">
@@ -231,53 +245,65 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media (min-width: 320px) and (max-width: 550px) {
+$background-black: rgba(0, 0, 0, 0.945);
+
+@media (min-width: 320px) and (max-width: 991px) {
   #alphabet-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     outline: 1px solid black;
+    position: relative;
+
+    .nihon-container {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+    }
+
+    .sakura-container-left {
+      position: absolute;
+      left: -4%;
+      top: 50px;
+    }
+
+    .sakura-container-right {
+      position: absolute;
+      right: 4%;
+      top: 50px;
+    }
     .wrapper {
+      outline: 1px solid rgba(255, 0, 0, 0.155);
+      background-color: $background-black;
+      .container {
+        margin-top: 160px;
+      }
       .title-container {
-        font-size: 1.5rem;
+        font-size: 5vw;
       }
       .title-symbols-container {
-        font-size: 1.5rem;
+        font-size: 5vw;
       }
 
       .chart {
         display: grid;
-        font-size: 1.5rem;
+        font-size: 5vw;
       }
     }
+  }
+  img {
+    width: 50%;
+    height: 50%;
   }
 }
 
 //FONTS
-th, td, p {
-    color: white;
+th,
+td,
+p {
+  color: white;
 }
-@media (min-width: 551px) and (max-width:991px) {
-    .wrapper {
-      .title-container {
-        font-size: 2.5rem;
-      }
-      .title-symbols-container {
-        font-size: 2.5rem;
-      }
-
-      .chart {
-        display: grid;
-        font-size: 3rem;
-        .row {
-        }
-      }
-    }
-    .chart {
-        font-size: 2rem;
-      }
-}
-
 
 @media (min-width: 992px) {
   #alphabet-container {
@@ -288,30 +314,34 @@ th, td, p {
     position: relative;
 
     .nihon-container {
-        position: absolute;
-        left: 50%;
-        top: 50px;
-        transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      top: 5%;
+      transform: translateX(-50%);
     }
 
     .sakura-container-left {
-        position: absolute;
-        left: 50px;
-        top: 50px;
+      position: absolute;
+      left: 0%;
+      top: 50px;
+
+      img {
+        animation: rotation-left 13s 0.2s infinite;
+      }
     }
 
     .sakura-container-right {
-        position: absolute;
-        right: 50px;
-        top: 50px;
-        
+      position: absolute;
+      right: 0%;
+      top: 50px;
+      img {
+        animation: rotation-right 13s 0.2s infinite;
+      }
     }
 
-    
-
     .wrapper {
-        outline: 1px solid rgba(255, 0, 0, 0.155);
-        background-color: rgba(0, 0, 0, 0.945);
+      outline: 1px solid rgba(255, 0, 0, 0.155);
+      background-color: $background-black;
       .title-container {
         font-size: 3rem;
       }
@@ -330,5 +360,33 @@ th, td, p {
 }
 
 .wrapper {
+}
+
+@keyframes rotation-right {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(0.5);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes rotation-left {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(-180deg) scale(0.5);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
 }
 </style>
