@@ -9,8 +9,63 @@
 
 <style lang="scss">
 
+// IMPORTS
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
+// GENERAL CLASSES
+
+.appear-animation {
+  opacity: 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradient {
+  background: #ddd6f3;
+  background: linear-gradient(to top, grey, rgba(175, 175, 33, 0.774), yellow);
+}
+
+.background-dark {
+  background-color: black;
+  color: white;
+  width: 100%;
+}
+
+.background-light {
+  background-color: white;
+  color: black;
+}
+
 // VARIABLES
-$background-black: rgba(0, 0, 0, 0.945);
+
+// FONTS
+
+.caveat-brush-regular {
+  font-family: "Caveat Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+//STRUCTURE
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,18 +73,53 @@ $background-black: rgba(0, 0, 0, 0.945);
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  font-family: "Caveat Brush", cursive;
 }
 
 nav {
   padding: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
   a {
     font-weight: bold;
     color: #2c3e50;
+    font-size: 3vw;
 
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+
+// ANIMATIONS
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes move-from-left {
+  0% {
+    left: -25vw;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes move-from-right {
+  0% {
+    right: -25vw;
+  }
+  100% {
+    right: 0;
   }
 }
 </style>

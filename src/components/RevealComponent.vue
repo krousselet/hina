@@ -31,6 +31,7 @@ p {
 }
 
 .block-reveal {
+  background-color: white;
   --t: calc(var(--td) + var(--d));
 
   color: transparent;
@@ -38,7 +39,7 @@ p {
 
   position: relative;
   overflow: hidden;
-  border-radius: 7px;
+  border-radius: 0px;
 
   animation: revealBlock 0s var(--t) forwards;
 }
@@ -49,7 +50,7 @@ p {
   width: 0%;
   height: 100%;
   padding-bottom: 4px;
-  border-radius: 7px;
+  border-radius: 0;
 
   position: absolute;
   top: 0;
