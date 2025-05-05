@@ -1,30 +1,29 @@
 <template>
-  <div>
-    <h2>Dessiner Hiragana / Katakana</h2>
-
+  <main>
+    <div class="title-container">
+      <h2 class="h2">Dessiner Hiragana / Katakana</h2>
+    </div>
     <!-- Kana Selection -->
     <div class="controls">
-      <select v-model="kanaType">
+      <select v-model="kanaType" class="text-desktop">
         <div class="container">
           <option value="hiragana">Hiragana</option>
           <img src="../../public/models/hiragana/a.svg" />
         </div>
         <div class="container">
-        <option value="katakana">
-          Katakana
-        </option>
-        <img src="../../public/models/katakana/a.svg" />
+          <option value="katakana">Katakana</option>
+          <img src="../../public/models/katakana/a.svg" />
         </div>
       </select>
 
-      <select v-model="selectedKana">
+      <select v-model="selectedKana" class="text-desktop">
         <option v-for="kana in kanaList" :key="kana" :value="kana">
           {{ kana }}
         </option>
       </select>
 
-      <button @click="clearCanvas">Effacer</button>
-      <button @click="scoreDrawing">Valider</button>
+      <button class="underline-hover-effect" @click="clearCanvas">Effacer</button>
+      <button class="underline-hover-effect" @click="scoreDrawing">Valider</button>
     </div>
 
     <!-- Canvas and model overlay -->
@@ -33,8 +32,10 @@
       <canvas ref="drawCanvas" width="400" height="400" />
     </div>
 
-    <div class="score" v-if="score !== null">Score: {{ score }}%</div>
-  </div>
+    <transition name="fade-score">
+  <div class="score" v-if="score !== null">Score: {{ score }}%</div>
+</transition>
+  </main>
 </template>
 
 <script>
@@ -172,111 +173,169 @@ export default {
     },
 
     scoreDrawing() {
-  const userData = this.ctx.getImageData(0, 0, 400, 400).data;
+      const userData = this.ctx.getImageData(0, 0, 400, 400).data;
 
-  const modelImg = new Image();
-  modelImg.crossOrigin = "Anonymous";
-  modelImg.src = this.modelImagePath;
+      const modelImg = new Image();
+      modelImg.crossOrigin = "Anonymous";
+      modelImg.src = this.modelImagePath;
 
-  modelImg.onload = () => {
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = 400;
-    tempCanvas.height = 400;
-    const tempCtx = tempCanvas.getContext("2d");
+      modelImg.onload = () => {
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = 400;
+        tempCanvas.height = 400;
+        const tempCtx = tempCanvas.getContext("2d");
 
-    tempCtx.fillStyle = "white";
-    tempCtx.fillRect(0, 0, 400, 400);
+        tempCtx.fillStyle = "white";
+        tempCtx.fillRect(0, 0, 400, 400);
 
-    tempCtx.drawImage(modelImg, 0, 0, 400, 400);
-    const modelData = tempCtx.getImageData(0, 0, 400, 400).data;
+        tempCtx.drawImage(modelImg, 0, 0, 400, 400);
+        const modelData = tempCtx.getImageData(0, 0, 400, 400).data;
 
-    let match = 0,
-      modelInk = 0;
+        let match = 0,
+          modelInk = 0;
 
-    for (let i = 0; i < modelData.length; i += 4) {
-      const modelAlpha = modelData[i + 3];
-      const modelBlack = modelData[i] < 100 && modelAlpha > 50;
+        for (let i = 0; i < modelData.length; i += 4) {
+          const modelAlpha = modelData[i + 3];
+          const modelBlack = modelData[i] < 100 && modelAlpha > 50;
 
-      if (modelBlack) {
-        modelInk++;
+          if (modelBlack) {
+            modelInk++;
 
-        const userAlpha = userData[i + 3];
-        const userBlack = userData[i] < 100 && userAlpha > 50;
+            const userAlpha = userData[i + 3];
+            const userBlack = userData[i] < 100 && userAlpha > 50;
 
-        if (userBlack) match++;
-      }
-    }
+            if (userBlack) match++;
+          }
+        }
 
-    const scoreValue = modelInk ? Math.round((match / modelInk) * 100) : 0;
-    this.score = scoreValue;
+        const scoreValue = modelInk ? Math.round((match / modelInk) * 100) : 0;
+        this.score = scoreValue;
 
-    if (scoreValue >= 80) {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    }
-  };
-}
+        if (scoreValue >= 80) {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+          });
+        }
+      };
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.canvas-wrapper {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  margin: 10px auto;
+
+// TRANSITION EFFECT
+
+.fade-score-enter-active,
+.fade-score-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
-.kana-model {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 400px;
-  height: 400px;
-  opacity: 0.3;
-  pointer-events: none;
-  // z-index: 2;
+.fade-score-enter-from,
+.fade-score-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
-
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 2px solid #333;
-  touch-action: none;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 7px;
+.fade-score-enter-to,
+.fade-score-leave-from {
+  opacity: 1;
+  transform: translateY(0);
 }
+main {
+  display: grid;
 
-.controls {
-  margin: 10px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
-  .container {
+  .controls {
+    margin: 10px;
     display: flex;
-    img {
-      width: 25px;
-      height: 25px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .container {
+      display: flex;
+      img {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    select,
+    select::picker(select) {
+      appearance: base-select;
+      border-radius: 7px;
     }
   }
+  .canvas-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 10px auto;
 
-  select,
-  select::picker(select) {
-    appearance: base-select;
+    .kana-model {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      opacity: 0.3;
+      pointer-events: none;
+      // z-index: 2;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: 2px solid #333;
+      touch-action: none;
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 7px;
+    }
+  }
+  .score {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
   }
 }
 
-.score {
-  margin-top: 10px;
-  font-size: 1.2em;
-  font-weight: bold;
+@media (min-width: 991px) {
+  main {
+    width: 75%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "top top top"
+      "left middle right";
+      margin: 0 auto;
+
+    .title-container {
+      grid-area: top;
+      width: 100%;
+    }
+
+    .canvas-wrapper {
+      grid-area: left;
+    }
+    .controls {
+     grid-area: middle;
+    }
+
+    .score {
+      grid-area: right;
+      font-size: 2rem;
+      margin: 10px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+  }
+
 }
 </style>

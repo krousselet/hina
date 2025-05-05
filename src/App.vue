@@ -13,7 +13,65 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
 
+//SCROLLBAR CUSTOMIZATION
+
+
+//FIREFOX
+
+* {
+  scrollbar-width: thin;           /* auto | thin | none */
+  scrollbar-color: #C70025 #f0f0f0;   /* thumb track */
+}
+
 // GENERAL CLASSES
+
+.no-scroll {
+  overflow-x: hidden;
+}
+
+.underline-hover-effect {
+  background: none;
+  outline: none;
+  border: none;
+  display: inline-flex;
+  position: relative;   
+  cursor: pointer;      
+  justify-content: center;
+  align-items: center;
+}
+
+.underline-hover-effect::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.2s ease;
+  transform: translateX(-50%);
+}
+
+.underline-hover-effect:hover::after {
+  width: 100%;
+  transition: width 0.2s ease;
+}
+
+.text-mobile {
+  font-size: 1rem;
+}
+
+.text-tablet {
+  font-size: 1.3rem;
+}
+
+.text-desktop {
+  font-size: 1.7rem;
+}
+
+.h2 {
+  font-size: 3rem;
+}
 
 .appear-animation {
   opacity: 0;

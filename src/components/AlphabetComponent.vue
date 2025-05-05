@@ -7,14 +7,14 @@
         srcset=""
       />
     </div>
-    <div class="sakura-container-left">
+    <div class="sakura-container-left no-scroll">
       <img
         src="../../public/images/desktop/sakura.png"
         alt="image de fleur de cerisier"
         srcset=""
       />
     </div>
-    <div class="sakura-container-right">
+    <div class="sakura-container-right no-scroll">
       <img
         src="../../public/images/desktop/sakura.png"
         alt="image de fleur de cerisier"
