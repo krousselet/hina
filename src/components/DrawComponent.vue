@@ -301,7 +301,7 @@ main {
   }
 }
 
-@media (min-width: 991px) {
+@media (min-width: 551px) {
   main {
     width: 75%;
     height: 100%;

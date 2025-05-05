@@ -26,7 +26,7 @@
 // GENERAL CLASSES
 
 .no-scroll {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .underline-hover-effect {
@@ -111,6 +111,7 @@
 // FONTS
 
 .caveat-brush-regular {
+  font-display: swap;
   font-family: "Caveat Brush", cursive;
   font-weight: 400;
   font-style: normal;

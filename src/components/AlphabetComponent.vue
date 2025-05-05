@@ -254,6 +254,7 @@ $background-black: rgba(0, 0, 0, 0.945);
     grid-template-rows: 1fr;
     outline: 1px solid black;
     position: relative;
+    overflow: hidden;
 
     .nihon-container {
       position: absolute;
@@ -270,7 +271,7 @@ $background-black: rgba(0, 0, 0, 0.945);
 
     .sakura-container-right {
       position: absolute;
-      right: 4%;
+      right: -4%;
       top: 50px;
     }
     .wrapper {
