@@ -15,34 +15,34 @@
           <img src="../../public/models/katakana/a.svg" />
         </div>
       </select>
-
+      
       <select v-model="selectedKana" class="text-desktop">
         <option v-for="kana in kanaList" :key="kana" :value="kana">
           {{ kana }}
         </option>
       </select>
-
+      
       <button class="underline-hover-effect" @click="clearCanvas">Effacer</button>
       <button class="underline-hover-effect" @click="scoreDrawing">Valider</button>
     </div>
-
+    
     <!-- Canvas and model overlay -->
     <div class="canvas-wrapper">
       <img :src="modelImagePath" class="kana-model" />
       <canvas ref="drawCanvas" width="400" height="400" />
     </div>
-
-    <transition name="fade-score">
-  <div class="score" v-if="score !== null">Score: {{ score }}%</div>
-</transition>
+    
   </main>
+  <transition name="fade-score">
+    <div class="score" v-if="score !== null">Score: {{ score }}%</div>
+  </transition>
 </template>
 
 <script>
 import confetti from "canvas-confetti";
 export default {
   name: "DrawComponent",
-
+  
   data() {
     return {
       drawing: false,
@@ -295,14 +295,21 @@ main {
     }
   }
   .score {
-    margin-top: 10px;
+    margin: 10px;
     font-size: 1.2em;
     font-weight: bold;
   }
 }
 @media (min-width: 320px) and (max-width:550px) {
   .title-container {
-    height: 130px;
+    height: 110px;
+    margin: 0 auto;
+  }
+
+  .score {
+    margin: 0 auto;
+    font-size: 1.2em;
+    font-weight: bold;
   }
   select, button {
     font-size: 1rem;
