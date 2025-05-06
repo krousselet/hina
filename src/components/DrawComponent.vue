@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="title-container">
-      <h2 class="h2">Dessiner Hiragana / Katakana</h2>
+      <h2 class="h2">Dessiner</h2>
     </div>
     <!-- Kana Selection -->
     <div class="controls">
@@ -211,7 +211,7 @@ export default {
         const scoreValue = modelInk ? Math.round((match / modelInk) * 100) : 0;
         this.score = scoreValue;
 
-        if (scoreValue >= 80) {
+        if (scoreValue >= 75) {
           confetti({
             particleCount: 100,
             spread: 70,
@@ -300,7 +300,21 @@ main {
     font-weight: bold;
   }
 }
+@media (min-width: 320px) and (max-width:550px) {
+  .title-container {
+    height: 130px;
+  }
+  select, button {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
 
+  canvas {
+    margin: 0 auto;
+  }
+
+
+}
 @media (min-width: 551px) {
   main {
     width: 75%;

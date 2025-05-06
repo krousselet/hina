@@ -10,7 +10,7 @@
     name: 'RevealComponent',
     data() {
       return {
-        textOne: "Nihon",
+        textOne: "Nihongo",
         textTwo: "Ensemble"
       }
     }
