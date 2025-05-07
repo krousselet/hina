@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/draw">Dessiner</router-link> |
-    <router-link to="/alphabet">Alphabet</router-link>
+    <router-link class="underline-hover-effect" to="/">Home</router-link> |
+    <router-link class="underline-hover-effect" to="/draw">Dessiner</router-link> |
+    <router-link class="underline-hover-effect" to="/alphabet">Alphabet</router-link>
   </nav>
   <router-view/>
 </template>
@@ -157,11 +157,12 @@ nav {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: black;
     font-size: 3vw;
+    text-decoration: none;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #C70025;
     }
   }
 }
