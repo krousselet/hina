@@ -25,6 +25,20 @@
 
 // GENERAL CLASSES
 
+// GLOBAL ANIMATIONS — Consider moving to a global SCSS file or `_animations.scss` partial
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1000;
+    stroke-opacity: 0;
+  }
+  1% {
+    stroke-opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 .no-scroll {
   overflow: hidden;
 }
@@ -153,6 +167,14 @@ nav {
 }
 
 // ANIMATIONS
+
+// SVG AUTO DRAWING
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 
 @keyframes appear {
   0% {
