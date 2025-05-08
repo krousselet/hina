@@ -177,9 +177,10 @@
         </svg>
         <!-- yo -->
         <svg
+          id="yo"
           xmlns="http://www.w3.org/2000/svg"
           width="54"
-          height="62"
+          height="41"
           viewBox="0 0 54 62"
           fill="none"
           stroke-dasharray="1000"
@@ -280,6 +281,7 @@ main {
     width: 100%;
     height: 100%;
     animation: appear 1s 0.5s forwards ease-in-out;
+    align-items: baseline;
 
     img {
       width: 100%;
