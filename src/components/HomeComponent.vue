@@ -51,6 +51,7 @@
           stroke-dasharray="1000"
           stroke-dashoffset="1000"
           style="filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))"
+          stroke-linecap="round"
         >
           <path
             class="letter-path"

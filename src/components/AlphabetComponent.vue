@@ -353,14 +353,9 @@ p {
       .chart {
         display: grid;
         font-size: 3rem;
-        .row {
-        }
       }
     }
   }
-}
-
-.wrapper {
 }
 
 @keyframes rotation-right {
